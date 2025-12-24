@@ -1,0 +1,16 @@
+name: orangepi-build
+id: ari:cloud:compass:e489ce12-950f-402e-8d4e-940f40450fe5:component/d3e19302-71bb-4ac1-ba88-53bb212819ec/8ff54fd0-90b3-4521-9c48-17d6539db1b5
+description: Orange Pi build for H2+, H3, H5, H6, H616, RK3328, RK3399 and RK3588(s)
+configVersion: 1
+typeId: SERVICE
+fields:
+  tier: 4
+links:
+  - name: null
+    type: REPOSITORY
+    url: https://github.com/groupe-carvi/orangepi-build
+relationships:
+  DEPENDS_ON: []
+labels:
+  - source:github
+customFields: null
