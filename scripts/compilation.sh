@@ -789,11 +789,23 @@ compile_plymouth-theme-orangepi()
 compile_orangepi-config()
 {
 	local tmpdir=${SRC}/.tmp/orangepi-config_${REVISION}_all
+	local spc_depends=""
 
 	display_alert "Building deb" "orangepi-config" "info"
 
 
 	mkdir -p "${tmpdir}"/{DEBIAN,usr/bin/,usr/sbin/,usr/lib/orangepi-config/}
+
+	# software-properties-common is an Ubuntu package and is not available on Debian (including trixie).
+	# orangepi-config can function without it (it is mainly used for add-apt-repository helpers).
+	case "${RELEASE}" in
+		xenial|bionic|focal|hirsute|impish|jammy|noble|oracular|plucky|questing|resolute)
+			spc_depends=", software-properties-common"
+			;;
+		*)
+			spc_depends=""
+			;;
+	esac
 
 	# set up control file
 	cat <<-END > "${tmpdir}"/DEBIAN/control
@@ -803,7 +815,7 @@ compile_orangepi-config()
 	Maintainer: $MAINTAINER <$MAINTAINERMAIL>
 	Replaces: orangepi-bsp
 	Depends: bash, iperf3, psmisc, curl, bc, expect, dialog, pv, \
-	debconf-utils, unzip, build-essential, html2text, apt-transport-https, html2text, dirmngr, software-properties-common
+	debconf-utils, unzip, build-essential, html2text, apt-transport-https, html2text, dirmngr${spc_depends}
 	Recommends: orangepi-bsp
 	Suggests: libpam-google-authenticator, qrencode, network-manager, sunxi-tools
 	Section: utils
