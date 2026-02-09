@@ -2,7 +2,7 @@ cracklib-runtime
 curl
 htop
 i2c-tools
-iozone3
+fio
 jq
 libcrack2
 lm-sensors
