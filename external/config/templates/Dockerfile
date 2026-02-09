@@ -46,12 +46,15 @@ RUN apt-get update \
        fakeroot \
        fdisk \
        flex \
+    fatattr \
        gawk \
        gcc-arm-linux-gnueabihf \
        gcc-arm-linux-gnueabi \
        gcc-arm-none-eabi \
+    gcc-riscv64-linux-gnu \
        gdisk \
        git \
+    git-lfs \
        imagemagick \
        jq \
        kmod \
@@ -72,6 +75,7 @@ RUN apt-get update \
        locales \
        lsb-release \
        lzop \
+    mtools \
        ncurses-base \
        ncurses-term \
        nfs-kernel-server \
@@ -111,6 +115,7 @@ RUN apt-get update \
        xxd \
        zip \
        zlib1g-dev \
+         scons \
     && rm -rf /var/lib/apt/lists/*
 RUN locale-gen en_US.UTF-8
 

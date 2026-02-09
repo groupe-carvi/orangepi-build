@@ -219,8 +219,8 @@ create_rootfs_cache()
 		display_alert "Installing base system" "Stage 1/2" "info"
 		cd $SDCARD # this will prevent error sh: 0: getcwd() failed
 
-		eval 'debootstrap --variant=minbase --include=${DEBOOTSTRAP_LIST// /,} ${PACKAGE_LIST_EXCLUDE:+ --exclude=${PACKAGE_LIST_EXCLUDE// /,}} \
-			--no-check-gpg --arch=$ARCH --components=${DEBOOTSTRAP_COMPONENTS} $DEBOOTSTRAP_OPTION --foreign ${release_version} $SDCARD/ ${apt_mirror}' \
+		eval 'debootstrap --variant=minbase${DEBOOTSTRAP_LIST:+ --include=${DEBOOTSTRAP_LIST// /,}} ${PACKAGE_LIST_EXCLUDE:+ --exclude=${PACKAGE_LIST_EXCLUDE// /,}} \
+			--no-check-gpg --arch=$ARCH --components=${DEBOOTSTRAP_COMPONENTS:-main} $DEBOOTSTRAP_OPTION --foreign ${release_version} $SDCARD/ ${apt_mirror}' \
 			${PROGRESS_LOG_TO_FILE:+' | tee -a $DEST/${LOG_SUBPATH}/debootstrap.log'} \
 			${OUTPUT_DIALOG:+' | dialog --backtitle "$backtitle" --progressbox "Debootstrap (stage 1/2)..." $TTY_Y $TTY_X'} \
 			${OUTPUT_VERYSILENT:+' >/dev/null 2>/dev/null'} ';EVALPIPE=(${PIPESTATUS[@]})'
